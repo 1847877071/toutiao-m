@@ -52,3 +52,28 @@ export const getChannels = () => {
     url: '/app/v1_0/user/channels'
   })
 }
+
+// 获取全部频道列表
+export const getAllChannels = () => {
+  return request({
+    method: 'GET',
+    url: '/app/v1_0/channels'
+  })
+}
+
+// 编辑保存频道列表
+export const addChannel = data => {
+  return request({
+    method: 'PATCH',
+    url: '/app/v1_0/user/channels',
+    data
+  })
+}
+
+// 删除用户频道列表
+export const deleteChannel = target => {
+  return request({
+    method: 'DELETE',
+    url: `/app/v1_0/user/channels/${target}`
+  })
+}

@@ -77,7 +77,7 @@ export default {
       // 注意：是push进去的
       const { results } = data.data
       this.articles.push(...results)
-      console.log(data)
+      // console.log(data)
 
       // 3.设置本次加载状态结束，它才可以判断是否需要加载下一次，否则就会永远的停在这里
       // 加载状态结束
