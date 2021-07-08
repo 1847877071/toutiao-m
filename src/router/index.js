@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 // import Login from '@/views/login/index.vue'
-// const Login = () => import('@/views/login/index.vue')
+// const Login = () => import('@/views/login/index.vue') 路由懒加载
 
 Vue.use(VueRouter)
 
@@ -9,6 +9,7 @@ const routes = [
   {
     path: '/login',
     name: 'login',
+    // component: Login 路由懒加载，这句和上面第四行结合简写为下面第13行
     component: () => import('@/views/login/index.vue')
   },
   {
@@ -37,6 +38,11 @@ const routes = [
         component: () => import('@/views/my/index.vue')
       }
     ]
+  },
+  {
+    path: '/search',
+    name: 'search',
+    component: () => import('@/views/search/index.vue')
   }
 ]
 

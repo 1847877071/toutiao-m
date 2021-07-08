@@ -9,6 +9,7 @@
         round
         icon="search"
         class="search-btn"
+        to="search"
         >搜索</van-button>
     </van-nav-bar>
     <!-- /导航栏 -->
@@ -74,7 +75,7 @@ export default {
     return {
       channels: [],
       active: 0, // 控制被激活的标签
-      isChannelEditShow: true // 频道编辑区域是否显示
+      isChannelEditShow: false // 频道编辑区域是否显示
     }
   },
   computed: {
@@ -115,7 +116,7 @@ export default {
     },
     onUpdateActive (index) {
       this.active = index
-      console.log(index)
+      // console.log(index)
     }
   }
 }
