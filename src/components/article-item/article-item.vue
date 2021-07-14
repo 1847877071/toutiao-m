@@ -1,6 +1,11 @@
 <template>
   <div class='article-item'>
-    <van-cell>
+    <van-cell :to="{
+      name: 'article',
+      params: {
+        articleId: article.art_id
+      }
+    }">
       <div slot="title" class="title van-multi-ellipsis--l3">{{article.title}}</div>
       <div slot="label">
         <div v-if="article.cover.images.length === 3" class="cover-wrap">

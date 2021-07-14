@@ -23,7 +23,7 @@
     <!-- /联想建议 -->
 
     <!-- 历史记录 -->
-    <search-history v-else :search-histories="searchHistories" @search="onSearch" />
+    <search-history v-else :search-histories="searchHistories" @search="onSearch" @update-histories="searchHistories=$event" />
     <!-- /历史记录 -->
   </div>
 </template>
@@ -54,6 +54,10 @@ export default {
     ...mapState(['user'])
   },
   watch: {
+    // 监视搜索历史记录的变化,存储到本地存储,这里以及这里的子组件就都不用再写setItem了,其它的就可以直接注释或者删除
+    searchHistories () {
+      setItem('search-histories', this.searchHistories)
+    }
   },
   created () {
     this.loadSearchHistories()
@@ -81,16 +85,16 @@ export default {
     async loadSearchHistories () {
       // 因为后端帮我们存储的用户搜索历史记录太少了(只有4条)
       // 所以我们这里让后端返回的历史记录和本地的历史记录合并到一起
-      let searchHistories = getItem('search-histories') || []
+      const localHistories = getItem('search-histories') || []
       // 如果用户已登录
       if (this.user) {
         const { data } = await getSearchHistories()
         // 合并数组:[...数组, ...数组]
         // 把Set转为数组:[...Set对象]
         // 数组去重:[...new Set([...数组,...数组])]
-        searchHistories = [...new Set([...searchHistories, ...data.data.keywords])]
+        this.searchHistories = [...new Set([...localHistories, ...data.data.keywords])]
       }
-      this.searchHistories = searchHistories
+      // this.searchHistories = searchHistories
     }
   }
 }

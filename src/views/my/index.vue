@@ -17,7 +17,7 @@
         />
         <div slot="title" class="user-name">{{currentUser.name}}</div>
         <!-- <van-cell title="昵称" slot="icon" /> -->
-        <van-button class="update-btn" slot="right-icon" round size="small">编辑资料</van-button>
+        <van-button class="update-btn" slot="right-icon" round size="small" to="/user/profile" >编辑资料</van-button>
       </van-cell>
       <van-grid :border="false" class="data-info">
         <van-grid-item class="data-info-item">
@@ -88,7 +88,7 @@ export default {
   methods: {
     async loadCurrentUser () {
       const { data } = await getCurrentUser()
-      console.log(data)
+      // console.log(data)
       this.currentUser = data.data
     },
     onLogout () {

@@ -3,12 +3,22 @@
  */
 
 import axios from 'axios'
+import JSONbig from 'json-bigint'
 
 // 在非组件模块中获取store必须通过这种方式
 // 这里单独加载store，和在组件中this.store一个东西
 import store from '@/store'
 const request = axios.create({
-  baseURL: 'http://ttapi.research.itcast.cn' // 基础路径
+  baseURL: 'http://ttapi.research.itcast.cn', // 基础路径
+  // transformResponse之前对其进行更改：
+  transformResponse: [function (data) {
+    // Do whatever you want to transform the data
+    try {
+      return JSONbig.parse(data)
+    } catch (err) {
+      return data
+    }
+  }]
   // baseURL: '/api'
 })
 

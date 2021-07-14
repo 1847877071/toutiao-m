@@ -8,6 +8,7 @@
       class="app-nav-bar"
     />
     <!-- /导航栏 -->
+    <!-- /导航栏 -->
     <!-- 登录表单 -->
     <!-- 基于Vant的表单验证：
     1、使用van-form组件包裹所有的表单项van-field
@@ -64,8 +65,8 @@ export default {
   data () {
     return {
       user: {
-        mobile: '',
-        code: ''
+        mobile: '13911111111',
+        code: '246810'
       },
       formRules: {
         mobile: [
