@@ -1,5 +1,6 @@
 <template>
   <div class='post-comment'>
+    <!-- v-model.trim="message" // 自动去掉文字两边空格 -->
     <van-field
       class="message"
       v-model.trim="message"

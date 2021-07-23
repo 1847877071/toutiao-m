@@ -1,16 +1,16 @@
 <template>
   <div class='comment-container'>
-    <!-- <van-list
+    <van-list
       v-model="loading"
       :finished="finished"
       finished-text="没有更多了"
       @load="onLoad"
-      > -->
-      <van-list
+    >
+      <!-- <van-list
       v-model="loading"
       :finished="finished"
       finished-text="没有更多了"
-      >
+      > -->
       <comment-item
         v-for="(comment, index) in commentlist"
         :key="index"
@@ -73,7 +73,7 @@ export default {
         limit: this.limit// 获取的评论数据个数，不传表示采用后端服务设定的默认每页数据量
       })
       this.$emit('total-count', data.data.total_count)
-      console.log(data)
+      // console.log(data)
       const { results } = data.data
       // 数据加给list
       this.commentlist.push(...results)
@@ -82,7 +82,7 @@ export default {
       this.loading = false
       // 判断是否加载完毕
       // console.log(results.length)
-      if (this.commentlist.length < data.data.total_count) {
+      if (results.length) {
         this.offset = data.data.last_id
         // console.log(data.data.last_id)
         // this.commentlist.push(...results)
@@ -90,10 +90,11 @@ export default {
         // 没有数据了，把加载状态设置结束，不再触发加载更多
         this.finished = true
       }
+      // this.commentlist.push(...results)
+      // console.log(this.commentlist)
     }
   }
 }
 </script>
 <style lang="less" scoped>
-
 </style>

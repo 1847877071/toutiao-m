@@ -104,14 +104,17 @@ export default {
       try {
         const res = await login(this.user)
         // 处理响应结果
-        console.log(res)
+        // console.log(res)
         Toast.success('展示成功提示')
         // 将后端返回的用户登录状态（token等数据）放到Vuex容器中
         this.$store.commit('setUser1', res.data.data)
+        // 清除layout的缓存，让它重新渲染
+        this.$store.commit('removeCachePage', 'layoutIndex')
         // 登录成功，跳转回原来页面
-        this.$router.back() // 先用这种方式，但是它不太好
+        // this.$router.back() // 先用这种方式，但是它不太好,有问题
+        this.$router.push(this.$route.query.redirect || '/')
       } catch (err) {
-        console.log(err)
+        // console.log(err)
         Toast.fail('登陆失败，手机号或者验证码错误')
       }
     },

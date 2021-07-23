@@ -8,8 +8,9 @@ Vue.use(Vuex)
 const USER_KEY = 'toutiao-user'
 export default new Vuex.Store({
   state: {
-    user: getItem(USER_KEY) // 当前登录用户的登录状态（token等数据）
+    user: getItem(USER_KEY), // 当前登录用户的登录状态（token等数据）
     // user: JSON.parse(window.localStorage.getItem('user'))
+    cachePages: ['layoutIndex'] // 这个是为了解决keep-alive缓存用户问题
   },
   mutations: {
     setUser1 (state, data) {
@@ -18,6 +19,19 @@ export default new Vuex.Store({
       setItem(USER_KEY, state.user)
       // window.localStorage.setItem('user', JSON.stringify(state.user))
       // 因为state.user是对象，所以存储需要用JSON转化为字符串
+    },
+    // 添加缓存页面,这两个也是为了解决keep-alive缓存用户问题
+    addCachePage (state, pageName) {
+      if (!state.cachePages.includes(pageName)) {
+        state.cachePages.push(pageName)
+      }
+    },
+    // 移出缓存页面
+    removeCachePage (state, pageName) {
+      const index = state.cachePages.indexOf(pageName)
+      if (index !== -1) {
+        state.cachePages.splice(index, 1)
+      }
     }
   },
   actions: {

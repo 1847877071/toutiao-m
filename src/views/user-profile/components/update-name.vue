@@ -9,18 +9,19 @@
     </van-nav-bar>
     <div class="nav-field-wrap">
       <van-field
-        v-model="localName.name"
+        v-model="localUser.name"
         rows="2"
         autosize
         type="textarea"
         maxlength="7"
-        :placeholder="请输入昵称"
+        placeholder="请输入昵称"
         show-word-limit
       />
     </div>
   </div>
 </template>
 <script>
+import { updateUserProfile } from '@/api/user.js'
 export default {
   name: 'updateName',
   components: {
@@ -33,7 +34,7 @@ export default {
   },
   data () {
     return {
-      localName: this.currentUser
+      localUser: this.currentUser
     }
   },
   computed: {
@@ -45,8 +46,27 @@ export default {
   mounted () {
   },
   methods: {
-    onConfirm () {
-      this.$oast('按钮')
+    async onConfirm () {
+      this.$toast.loading({
+        message: '保存中...请勿重复点击！',
+        forbidClick: true
+      })
+      try {
+        await updateUserProfile({
+          name: this.localUser.name
+        })
+        this.$toast({
+          message: '保存成功！'
+        })
+        // this.$emit('updateName', this.localUser.name)
+        this.$emit('updateNameClose')
+      } catch (err) {
+        if (err && err.response && err.response.status === 409) {
+          this.$toast({
+            message: '此名字太抢手了，已被占用！'
+          })
+        }
+      }
     }
   }
 }

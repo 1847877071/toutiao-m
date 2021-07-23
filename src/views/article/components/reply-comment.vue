@@ -18,7 +18,7 @@
       >
         全部评论
       </van-divider>
-      <comment-index
+      <commentIndex
         :source="comment.com_id"
         type="c"
       />

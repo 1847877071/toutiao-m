@@ -102,3 +102,19 @@ export const getUserProfile = data => {
     data
   })
 }
+// 编辑用户个人信息
+export const updateUserProfile = data => {
+  return request({
+    url: '/app/v1_0/user/profile',
+    method: 'PATCH',
+    data
+  })
+}
+// 编辑用户照片
+export const updateUserPhoto = data => {
+  return request({
+    url: '/app/v1_0/user/photo',
+    method: 'PATCH',
+    data
+  })
+}
